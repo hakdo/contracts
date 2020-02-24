@@ -11,3 +11,5 @@ class ContractForm(forms.ModelForm):
             'valid_from': forms.DateInput(attrs={'type': 'date'}),
             'expires': forms.DateInput(attrs={'type': 'date'}),
         }
+
+        
