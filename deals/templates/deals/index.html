@@ -1,0 +1,49 @@
+{% extends 'deals/base.html' %}
+{% load static %}
+
+{% block sidebar %}
+<a href="{% url 'contracts' status='active' %}" {% if status == 'active' %} class =' active' {% endif %}>Active</a><br>
+<a href="{% url 'contracts' status='negotiation' %}" {% if status == 'negotiation' %} class =' active' {% endif %}>Negotiation</a><br>
+<a href="{% url 'contracts' status='expired' %}" {% if status == 'expired' %} class =' active' {% endif %}>Expired</a><br>
+<a href="{% url 'contracts' status='cancelled' %}" {% if status == 'cancelled' %} class =' active' {% endif %}>Cancelled</a><br>
+<a href="{% url 'contracts' status='terminated' %}" {% if status == 'terminated' %} class =' active' {% endif %}>Terminated</a><br>
+<a href="{% url 'contracts' status='all' %}" {% if status == 'all' %} class =' active' {% endif %}>All</a>
+
+{% endblock %}
+
+{% block content %}
+<h1>{{heading}} <span class="queryterm">{{queryterm}}</span></h1>
+<a href="{% url 'new_contract' %}">New contract</a>
+<div class="error">{{ error }}</div>
+<table class="contracts-table">
+    <tr>
+        <th>Partner</th>
+        <th>Contract No.</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Expires</th>
+    </tr>
+    {% for contract in contracts %}
+    <tr>
+        <td>
+            <a href="{% url 'partner_contracts' pk=contract.contract_party.pk %}">
+                {{contract.contract_party}}
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'contract_detail' pk=contract.pk %}">
+                {{contract.contract_number}}
+            </a>
+        </td>
+        <td>{{contract.contract_type}}</td>
+        <td>{{contract.description}}</td>
+        <td>
+            <a href="{% url 'contracts' status=contract.status %}">
+                {{contract.status}}</td>
+            </a>
+        <td>{{contract.expires}}</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

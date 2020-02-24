@@ -1,0 +1,33 @@
+{% extends 'deals/base.html' %}
+{% load static %}
+
+{% block sidebar %}
+
+{% endblock %}
+
+{% block content %}
+<h1>Partners</h1>
+
+<table class="contracts-table">
+    <tr>
+        <th>
+            Contract partner
+        </th>
+        <th>
+            Entity type
+        </th>
+        <th>
+            # Contracts
+        </th>
+    </tr>
+    {% for partner in partners %}
+        <tr>
+            <td><a href="{% url 'partner_contracts' pk=partner.pk %}">{{partner.name}}</a></td>
+            <td>{{partner.entity_type}}</td>
+            <td>{{partner.numcon}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

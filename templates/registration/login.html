@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      }
+      .content {
+        width: 80%;
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: linen;
+        padding: 15px;
+        margin-top: 25px;
+        border-radius: 5px;
+      }
+
+      /* Style inputs with type="text", select elements and textareas */
+      input, select, textarea {
+        width: 100%; /* Full width */
+        padding: 12px; /* Some padding */ 
+        border: 1px solid #ccc; /* Gray border */
+        border-radius: 4px; /* Rounded borders */
+        box-sizing: border-box; /* Make sure that padding and width stays in place */
+        margin-top: 6px; /* Add a top margin */
+        margin-bottom: 16px; /* Bottom margin */
+        resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+      }
+
+      /* Style the submit button with a specific background color etc */
+      input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: large;
+        cursor: pointer;
+      }
+
+      /* When moving the mouse over the submit button, add a darker green color */
+      input[type=submit]:hover {
+        background-color: #45a049;
+      }
+
+    </style>
+    <title>Login</title>
+</head>
+<body>
+  <div class="content">
+    <h1>Log in to contracts management</h1>
+  {% if form.errors %}
+    <p style="color: red;">Your username and password didn't match. Please try again.</p>
+  {% endif %}
+  
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Login"/>
+        <input type="hidden" name="next" value="{{ next }}" />
+      </form>
+
+  </div>
+  
+</body>
+</html>
