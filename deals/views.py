@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from . models import Contract, Partner
 from django.contrib.auth.decorators import login_required
-from .forms import ContractForm
+from .forms import ContractForm, PartnerForm
 from django import forms
 
 # Create your views here.
@@ -80,3 +80,15 @@ def edit_contract(request, pk):
         form = ContractForm(instance=myinstance)
         form.fields['contract_party'].queryset = partners
     return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Editing Contract ' + str(myinstance.contract_number), 'activetab': 'contracts'})
+
+def new_partner(request):
+    if request.method == 'POST':
+        form = PartnerForm(request.POST)
+        if form.is_valid():
+            partner = form.save(commit=False)
+            partner.owner = request.user.profile.organization
+            partner.save()
+            return redirect('partners')
+    else:
+        form = PartnerForm()
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Partner', 'activetab': 'partners'})

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Contract
+from .models import Contract, Partner
 
 class ContractForm(forms.ModelForm):
     
@@ -12,4 +12,8 @@ class ContractForm(forms.ModelForm):
             'expires': forms.DateInput(attrs={'type': 'date'}),
         }
 
-        
+class PartnerForm(forms.ModelForm):
+
+    class Meta:
+        model = Partner
+        fields = ('name', 'entity_type',)
