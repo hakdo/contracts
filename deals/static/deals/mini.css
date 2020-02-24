@@ -211,3 +211,11 @@ body {
           display: block;
       }
   }
+  
+  .configform {
+      border-radius: 5px;
+      background-color: #ccc;
+      padding: 15px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }

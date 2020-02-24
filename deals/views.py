@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from . models import Contract, Partner
 from django.contrib.auth.decorators import login_required
-from .forms import ContractForm, PartnerForm
+from .forms import ContractForm, PartnerForm, MemberConfigForm
 from django import forms
+from django.contrib.auth.models import User
+import uuid
 
 # Create your views here.
 @login_required()
@@ -56,6 +58,7 @@ def search(request):
         errmsg = ''
     return render(request, 'deals/index.html', {'contracts': mycontracts, 'activetab': 'contracts', 'heading': heading, 'status': status, 'error': errmsg, 'queryterm': query})
 
+@login_required()
 def new_contract(request):
     partners = Partner.objects.filter(owner = request.user.profile.organization)
     # Change the dropdown possibilities to your own orgs. 
@@ -69,6 +72,7 @@ def new_contract(request):
         form.fields['contract_party'].queryset = partners
     return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Contract', 'activetab': 'contracts'})
 
+@login_required()
 def edit_contract(request, pk):
     partners = Partner.objects.filter(owner = request.user.profile.organization)
     myinstance = get_object_or_404(Contract, pk=pk, contract_party__in = partners)
@@ -81,6 +85,7 @@ def edit_contract(request, pk):
         form.fields['contract_party'].queryset = partners
     return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Editing Contract ' + str(myinstance.contract_number), 'activetab': 'contracts'})
 
+@login_required()
 def new_partner(request):
     if request.method == 'POST':
         form = PartnerForm(request.POST)
@@ -92,3 +97,28 @@ def new_partner(request):
     else:
         form = PartnerForm()
     return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Partner', 'activetab': 'partners'})
+
+@login_required()
+def team(request):
+    if not request.user.profile.is_admin:
+        return redirect('index')
+    else:
+        # Is a team admin, can go to the page
+        # Get all team members so far
+        members = User.objects.filter(profile__organization=request.user.profile.organization)
+        if request.method == "POST":
+            form = MemberConfigForm(request.POST)
+            accepting_members = request.user.profile.organization.accepting_members
+            if form.is_valid():
+                # First see if there is a change in accepting_members:
+                myorg = request.user.profile.organization
+                if form.cleaned_data['allow_new_members'] != accepting_members:
+                    # Update accepting_members setting
+                    myorg.accepting_members = form.cleaned_data['allow_new_members']
+                    myorg.save()
+                if form.cleaned_data['update_organization_secret']:
+                    # Generate a new uuid4 and save...
+                    myorg.orgsecret = uuid.uuid4()
+                    myorg.save()
+        form = MemberConfigForm(initial={'allow_new_members': request.user.profile.organization.accepting_members})
+        return render(request, 'deals/team.html', {'members': members, 'configform': form})

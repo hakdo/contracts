@@ -8,6 +8,8 @@ from django.dispatch import receiver
 class Organization(models.Model):
     name = models.CharField(max_length=128)
     active = models.BooleanField(default=False)
+    accepting_members = models.BooleanField(default=True)
+    orgsecret = models.UUIDField(primary_key=False, default=uuid.uuid4, editable=True)
 
     def __str__(self):
         return self.name + ' (Active: ' + str(self.active) + ')'
