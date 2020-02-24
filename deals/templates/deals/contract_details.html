@@ -1,40 +1,37 @@
 {% extends 'deals/base.html' %}
 {% load static %}
 
-{% block sidebar %}
-<a href="{% url 'index' %}">Contracts home</a>
-
-{% endblock %}
-
 {% block content %}
-<h1>Contract details: {{contract}}</h1>
-<p>{{contract.contract_number}}</p>
-<a href="{% url 'edit_contract' pk=contract.pk %}">Edit</a>
-<table class="contracts-table">
-    <tr>
-        <th>Partner</th>
-        <td>
-            <a href="{% url 'partner_contracts' pk=contract.contract_party.pk %}">
-                {{contract.contract_party}}
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <th>Status</th><td>{{contract.status|title}}</td>
-    </tr>
-    <tr>
-        <th>Status</th><td>{{contract.description|title}}</td>
-    </tr>
-    <tr>
-        <th>Category</th><td>{{contract.contract_type|title}}</td>
-    </tr>
-    <tr>
-        <th>Valid from</th><td>{{contract.valid_from}}</td>
-    </tr>
-    <tr>
-        <th>Expires</th><td>{{contract.expires}}</td>
-    </tr>
-</table>
+<div>
+    <h1>Contract details: {{contract}}</h1>
+    <p>{{contract.contract_number}}</p>
+    <a href="{% url 'edit_contract' pk=contract.pk %}">Edit</a>
+    <table class="contracts-table">
+        <tr>
+            <th>Partner</th>
+            <td>
+                <a href="{% url 'partner_contracts' pk=contract.contract_party.pk %}">
+                    {{contract.contract_party}}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th>Status</th><td>{{contract.status|title}}</td>
+        </tr>
+        <tr>
+            <th>Status</th><td>{{contract.description|title}}</td>
+        </tr>
+        <tr>
+            <th>Category</th><td>{{contract.contract_type|title}}</td>
+        </tr>
+        <tr>
+            <th>Valid from</th><td>{{contract.valid_from}}</td>
+        </tr>
+        <tr>
+            <th>Expires</th><td>{{contract.expires}}</td>
+        </tr>
+    </table>
+</div>
 
 
 {% endblock %}

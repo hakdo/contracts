@@ -67,7 +67,7 @@ def new_contract(request):
     else:
         form = ContractForm()
         form.fields['contract_party'].queryset = partners
-    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Contract'})
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Contract', 'activetab': 'contracts'})
 
 def edit_contract(request, pk):
     partners = Partner.objects.filter(owner = request.user.profile.organization)
@@ -79,4 +79,4 @@ def edit_contract(request, pk):
     else:
         form = ContractForm(instance=myinstance)
         form.fields['contract_party'].queryset = partners
-    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Editing Contract ' + str(myinstance.contract_number)})
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Editing Contract ' + str(myinstance.contract_number), 'activetab': 'contracts'})

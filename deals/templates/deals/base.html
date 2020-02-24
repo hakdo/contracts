@@ -4,26 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'deals/mini.css' %}">
     <title>Contracts</title>
 </head>
 <body>
-    
-    <div class="sidebar">
-        {% block sidebar %} {% endblock %}
-    </div>
+
     <div class="content">
-        <div class="topnav">
+        <div class="topnav" id="myTopnav">
             <a href="{% url 'index' %}" {% if activetab == 'contracts' %}class="active" {% endif %}>Contracts</a>
             <a href="{% url 'partners' %}" {% if activetab == 'partners' %}class="active" {% endif %}>Partners</a>
             {% if user.is_authenticated %}
             <a href="{% url 'logout' %}">Log out</a>
             {% endif %}
             <form action="{% url 'search'  %}" method="GET">
-                <input type="text" placeholder="Search.." name="query" class="search" />
+                <input type="text" placeholder="Search.." name="query" class="search" id="lg-search" />
             </form>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+              </a>
         </div>
+        <form action="{% url 'search'  %}" method="GET" >
+            <input type="text" placeholder="Search.." name="query" class="search" id="sm-search" />
+        </form>
         {% block content %} {% endblock %}
     </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        } 
+    </script>
 </body>
 </html>
