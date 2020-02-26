@@ -5,10 +5,11 @@
 {% block content %}
 <div class="infoblock">
     <h1>{{heading}}</h1>
+    <p>{{errormsg}}</p>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Create Contract Record" />
+        <input type="submit" value="{{submitvalue}}" />
     </form>
 </div>
 

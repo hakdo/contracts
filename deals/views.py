@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
-from . models import Contract, Partner
+from . models import Contract, Partner, Organization
 from django.contrib.auth.decorators import login_required
-from .forms import ContractForm, PartnerForm, MemberConfigForm
+from .forms import ContractForm, PartnerForm, MemberConfigForm, RegisterForm
 from django import forms
 from django.contrib.auth.models import User
 import uuid
@@ -70,7 +70,7 @@ def new_contract(request):
     else:
         form = ContractForm()
         form.fields['contract_party'].queryset = partners
-    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Contract', 'activetab': 'contracts'})
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Contract', 'activetab': 'contracts', 'submitvalue': 'Create contract record'})
 
 @login_required()
 def edit_contract(request, pk):
@@ -83,7 +83,7 @@ def edit_contract(request, pk):
     else:
         form = ContractForm(instance=myinstance)
         form.fields['contract_party'].queryset = partners
-    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Editing Contract ' + str(myinstance.contract_number), 'activetab': 'contracts'})
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Editing Contract ' + str(myinstance.contract_number), 'activetab': 'contracts', 'submitvalue': 'Save changes'})
 
 @login_required()
 def new_partner(request):
@@ -96,7 +96,7 @@ def new_partner(request):
             return redirect('partners')
     else:
         form = PartnerForm()
-    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Partner', 'activetab': 'partners'})
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Partner', 'activetab': 'partners', 'submitvalue': 'Create contract partner'})
 
 @login_required()
 def team(request):
@@ -122,3 +122,26 @@ def team(request):
                     myorg.save()
         form = MemberConfigForm(initial={'allow_new_members': request.user.profile.organization.accepting_members})
         return render(request, 'deals/team.html', {'members': members, 'configform': form})
+
+def register(request):
+    # Registration of a user with an invite code. Fields for registration would 
+    # include email, password, password-confirm, secretcode
+    errormsg = ''
+    # if the person is already registered and logged in, redirect to the index page
+    if request.user.is_authenticated:
+        return redirect('index')
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            confirm_password = form.cleaned_data['confirm_password']
+            secret_code = form.cleaned_data['secret_code']
+            myorg = Organization.objects.get(orgsecret = secret_code)
+            user = User.objects.create_user(username, '', password)
+            user.profile.organization = myorg
+            user.save()
+            return redirect('login')
+    else:
+        form = RegisterForm()
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Register your account', 'errormsg': errormsg, 'submitvalue': 'Register'})

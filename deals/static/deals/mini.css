@@ -219,3 +219,9 @@ body {
       margin-top: 10px;
       margin-bottom: 10px;
   }
+
+  ul.errorlist li {
+      list-style: none;
+      color: red;
+      font-family: 'Courier New', Courier, monospace;
+  }
