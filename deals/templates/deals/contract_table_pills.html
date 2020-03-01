@@ -1,0 +1,28 @@
+<a href="{% url 'new_contract' %}" class="mobile-only">New contract</a>
+<div class="pillnav">
+    <a href="{% url 'new_contract' %}" class="pill">
+        <button type="button" class="new-btn pill-btn">
+            Create New
+        </button>
+    </a>
+    <a href="{% url 'contracts' status='active' %}" class="pill">
+        <button class="{% if status == 'active' %}active {% endif %} pill-btn">
+            Active
+        </button>
+    </a>
+    <a href="{% url 'contracts' status='negotiation' %}" class="pill">
+        <button type="button" class="{% if status == 'negotiation' %}active {% endif %} pill-btn">
+            Negotiation
+        </button> 
+    </a>
+    <a href="{% url 'contracts' status='expired' %}" class="pill">
+        <button class="{% if status == 'expired' %}active {% endif %} pill-btn">
+            Expired
+        </button>
+    </a>
+    <a href="{% url 'contracts' status='all' %}" class="pill">
+        <button type="button" class="{% if status == 'all' %}active {% endif %} pill-btn">
+            All
+        </button>
+    </a>
+</div> 

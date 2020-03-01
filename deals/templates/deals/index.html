@@ -3,7 +3,8 @@
 
 {% block content %}
 <h1>{{heading}} <span class="queryterm">{{queryterm}}</span></h1>
-<a href="{% url 'new_contract' %}">New contract</a>
+
+{% include 'deals/contract_table_pills.html' %}
 <div class="error">{{ error }}</div>
 <table class="contracts-table">
     <tr>

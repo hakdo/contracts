@@ -225,3 +225,43 @@ body {
       color: red;
       font-family: 'Courier New', Courier, monospace;
   }
+
+  .pillnav {
+      background-color: #444;
+  }
+
+  a.pill {
+      text-decoration: none;
+  }
+
+  .pill-btn {
+    background-color: #444;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    font-size: small;
+    cursor: pointer;
+  }
+
+  .pill-btn.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .pill-btn.new-btn {
+    color: #4CAF50;
+    float: right;
+  }
+
+  /* Hide pillnav on mobile and only show active directly */
+  @media screen and (max-width: 600px) {
+    .pillnav {
+        display: none;
+    }
+  }
+
+  @media screen and (min-width: 601px) {
+    .mobile-only {
+        display: none;
+    }
+  }
