@@ -34,7 +34,6 @@ class RegisterForm(forms.Form):
         data = cleaned_data['username']
         # Check if this username exists
         usersearch = User.objects.filter(username = data)
-        print("Validating user returned ", usersearch)
         if usersearch:
             raise forms.ValidationError("You have to pick a different username.")
         return data
