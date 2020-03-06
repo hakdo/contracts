@@ -31,7 +31,7 @@
             <th>Expires</th><td>{{contract.expires}}</td>
         </tr>
         <tr>
-            <th>Document</th><td><a href="{{contract.document_link}}" target="_blank">{{contract.document_link}}</a></td>
+            <th>Document</th><td>{% if contract.document_link %}<a href="{{contract.document_link}}" target="_blank">{{contract.document_link}}</a>{% endif %}</td>
         </tr>
     </table>
 </div>
