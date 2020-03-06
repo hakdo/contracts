@@ -46,9 +46,9 @@ def partner_detail(request, pk):
 def search(request):
     # View to return search results using the index template
     query = request.GET.get('query', '') 
-    partnersearch = Contract.objects.filter(contract_party__name__contains=query)
+    partnersearch = Contract.objects.filter(contract_party__name__icontains=query)
     # Check in description field
-    descriptionsearch = Contract.objects.filter(description__contains=query)
+    descriptionsearch = Contract.objects.filter(description__icontains=query)
     mycontracts = (partnersearch | descriptionsearch).filter(contract_party__owner = request.user.profile.organization).distinct()
     heading = "Search results for query "
     status = 'all'
