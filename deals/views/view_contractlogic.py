@@ -7,18 +7,32 @@ from django import forms
 from django.contrib.auth.models import User
 import uuid
 
+contract_types = ['employment','sales','LOI','NDA','partnership','DPA','other']
+
 # Create your views here.
 @login_required()
 def index(request, status='active'):
     # View to list contracts based on status. The default is active.
+    errmsg = ''
     if status not in ['active', 'negotiation', 'expired', 'cancelled', 'terminated', 'all']:
         raise Http404('Invalid contract status')
     elif status == 'all':
         mycontracts = Contract.objects.filter(contract_party__owner = request.user.profile.organization)
     else:
         mycontracts = Contract.objects.filter(status=status, contract_party__owner = request.user.profile.organization)
+    cfilter = request.GET.get('filter', None)
+    sortby = request.GET.get('sort', None)
+    if cfilter in contract_types:
+        mycontracts = mycontracts.filter(contract_type = cfilter)
+    elif cfilter is not None:
+        mycontracts = Contract.objects.none()
+        errmsg = 'No match for your filter.'
+    if sortby in ['contract_party', 'contract_type', 'status', 'expires']:
+        mycontracts = mycontracts.order_by(sortby)
+    elif sortby is not None:
+        errmsg = 'Your sort key is invalid.'
     heading = 'Contracts: ' + status
-    return render(request, 'deals/index.html', {'contracts': mycontracts, 'activetab': 'contracts', 'heading': heading, 'status': status})
+    return render(request, 'deals/index.html', {'contracts': mycontracts, 'activetab': 'contracts', 'heading': heading, 'status': status, 'error': errmsg})
 
 @login_required()
 def contract_detail(request, pk):
