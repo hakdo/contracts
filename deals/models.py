@@ -31,6 +31,7 @@ class Contract(models.Model):
     valid_from = models.DateField(blank=True, null=True)
     expires = models.DateField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=(('negotiation', 'Negotiation'), ('active','Active'),('cancelled','Cancelled'),('terminated', 'Terminated'),('expired','Expired'),), blank=True)
+    document_link = models.URLField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.contract_party.name + ': ' + self.contract_type + ' (' + self.status + ')'
