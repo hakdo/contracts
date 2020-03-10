@@ -23,10 +23,10 @@
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
               </a>
-              <form action="{% url 'search'  %}" method="GET" >
-                  <input type="text" placeholder="Search.." name="query" class="search" id="sm-search" />
-              </form>
-        </div>
+            </div>
+                  <form action="{% url 'search'  %}" method="GET" >
+                      <input type="text" placeholder="Search.." name="query" class="search" id="sm-search" />
+                  </form>
         <div class="orgname">
             {{ user.profile.organization.name }} | {{ user.username }}
             {% if user.profile.is_admin %} | <a href="{% url 'team' %}">Admin</a>{% endif %}
