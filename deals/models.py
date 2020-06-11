@@ -7,7 +7,9 @@ from django.dispatch import receiver
 # Create your models here.
 class Organization(models.Model):
     name = models.CharField(max_length=128)
-    active = models.BooleanField(default=False)
+    orgnr = models.CharField(max_length=9, blank=True)
+    active = models.BooleanField(default=True)
+    trial = models.BooleanField(default=True)
     accepting_members = models.BooleanField(default=True)
     orgsecret = models.UUIDField(primary_key=False, default=uuid.uuid4, editable=True)
 

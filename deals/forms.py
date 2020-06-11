@@ -57,3 +57,42 @@ class RegisterForm(forms.Form):
         if password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         return self.cleaned_data
+
+class RegisterNew(forms.Form):
+    epost = forms.EmailField(max_length=128)
+    passord = forms.CharField(max_length=128, widget=forms.PasswordInput, validators=[validate_password])
+    bekreft_passord = forms.CharField(max_length=128, widget=forms.PasswordInput)
+    firmanavn = forms.CharField(max_length=128)
+    organisasjonsnummer = forms.CharField(max_length=12, help_text="Organisasjonsnummer 9 siffer")
+
+    def clean_epost(self):
+        cleaned_data = super().clean()
+        data = cleaned_data['epost']
+        # Check if this username exists
+        usersearch = User.objects.filter(username = data)
+        if usersearch:
+            raise forms.ValidationError("Denne epostadressen kunne ikke registreres.")
+        return data
+    
+    def clean_organisasjonsnummer(self):
+        cleaned_data = super().clean()
+        data = cleaned_data['organisasjonsnummer']
+        # Check if this username exists
+        orgsearch = Organization.objects.filter(orgnr = data)
+        if orgsearch:
+            raise forms.ValidationError("Organisasjonsnummeret er allerede registrert.")
+        else:
+            # Validate or number
+            print("Need to add orgnum validation")
+        return data
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get('passord')
+        password2 = cleaned_data.get('bekreft_passord')
+
+        if password1 != password2:
+            raise forms.ValidationError("Passwords don't match")
+        elif len(password1) < 8:
+            raise forms.ValidationError("Password is too short")
+        return self.cleaned_data

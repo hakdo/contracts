@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from .. models import Contract, Partner, Organization
 from django.contrib.auth.decorators import login_required
-from .. forms import ContractForm, PartnerForm, MemberConfigForm, RegisterForm
+from .. forms import ContractForm, PartnerForm, MemberConfigForm, RegisterForm, RegisterNew
 from django import forms
 from django.contrib.auth.models import User
 import uuid
@@ -53,4 +53,27 @@ def register(request):
             return redirect('login')
     else:
         form = RegisterForm()
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Register your account', 'errormsg': errormsg, 'submitvalue': 'Register'})
+
+def new(request):
+    errormsg = ''
+    if request.user.is_authenticated:
+        return redirect('index')
+    if request.method == 'POST':
+        form = RegisterNew(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['epost']
+            password = form.cleaned_data['passord']
+            confirm_password = form.cleaned_data['bekreft_passord']
+            orgnr = form.cleaned_data['organisasjonsnummer']
+            company_name = form.cleaned_data['firmanavn']
+            # Create new organization
+            org = Organization(name=company_name, orgnr=orgnr)
+            org.save()
+            user = User.objects.create_user(username, '', password)
+            user.profile.organization = org
+            user.save()
+            return redirect('login')
+    else:
+        form = RegisterNew()
     return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Register your account', 'errormsg': errormsg, 'submitvalue': 'Register'})
