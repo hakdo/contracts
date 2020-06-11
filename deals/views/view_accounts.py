@@ -72,6 +72,7 @@ def new(request):
             org.save()
             user = User.objects.create_user(username, '', password)
             user.profile.organization = org
+            user.profile.is_admin = True
             user.save()
             return redirect('login')
     else:
