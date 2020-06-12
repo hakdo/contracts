@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Contract, Partner, Organization
 from django.contrib.auth.password_validation import validate_password
+from django.utils.translation import gettext_lazy as _
 
 class ContractForm(forms.ModelForm):
     
@@ -59,11 +60,12 @@ class RegisterForm(forms.Form):
         return self.cleaned_data
 
 class RegisterNew(forms.Form):
-    epost = forms.EmailField(max_length=128)
-    passord = forms.CharField(max_length=128, widget=forms.PasswordInput, validators=[validate_password])
-    bekreft_passord = forms.CharField(max_length=128, widget=forms.PasswordInput)
-    firmanavn = forms.CharField(max_length=128)
-    organisasjonsnummer = forms.CharField(max_length=12, help_text="Organisasjonsnummer 9 siffer")
+    epost = forms.EmailField(max_length=128, label=_('E-mail'))
+    passord = forms.CharField(max_length=128, widget=forms.PasswordInput, validators=[validate_password], label=_('Password'))
+    bekreft_passord = forms.CharField(max_length=128, widget=forms.PasswordInput, label=_('Confirm password'))
+    firmanavn = forms.CharField(max_length=128, label=_('Company name'))
+    country = forms.CharField(max_length=128, label=_('Country'))
+    orgno = forms.CharField(max_length=128, label=_('VAT registration number'))
 
     def clean_epost(self):
         cleaned_data = super().clean()
@@ -71,16 +73,16 @@ class RegisterNew(forms.Form):
         # Check if this username exists
         usersearch = User.objects.filter(username = data)
         if usersearch:
-            raise forms.ValidationError("Denne epostadressen kunne ikke registreres.")
+            raise forms.ValidationError(_('This email address cannot be used to register an account.'))
         return data
     
     def clean_organisasjonsnummer(self):
         cleaned_data = super().clean()
-        data = cleaned_data['organisasjonsnummer']
+        data = cleaned_data['orgno']
         # Check if this username exists
         orgsearch = Organization.objects.filter(orgnr = data)
         if orgsearch:
-            raise forms.ValidationError("Organisasjonsnummeret er allerede registrert.")
+            raise forms.ValidationError(_('The VAT number is already in our systems.'))
         else:
             # Validate or number
             print("Need to add orgnum validation")
@@ -92,7 +94,7 @@ class RegisterNew(forms.Form):
         password2 = cleaned_data.get('bekreft_passord')
 
         if password1 != password2:
-            raise forms.ValidationError("Passwords don't match")
+            raise forms.ValidationError(_('Passwords do not match'))
         elif len(password1) < 8:
-            raise forms.ValidationError("Password is too short")
+            raise forms.ValidationError(_('Password is too short'))
         return self.cleaned_data

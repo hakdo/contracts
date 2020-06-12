@@ -6,6 +6,7 @@ from .. forms import ContractForm, PartnerForm, MemberConfigForm, RegisterForm, 
 from django import forms
 from django.contrib.auth.models import User
 import uuid
+from django.utils.translation import gettext as _
 
 @login_required()
 def team(request):
@@ -57,6 +58,7 @@ def register(request):
 
 def new(request):
     errormsg = ''
+    heading = _('Register your account')
     if request.user.is_authenticated:
         return redirect('index')
     if request.method == 'POST':
@@ -65,7 +67,7 @@ def new(request):
             username = form.cleaned_data['epost']
             password = form.cleaned_data['passord']
             confirm_password = form.cleaned_data['bekreft_passord']
-            orgnr = form.cleaned_data['organisasjonsnummer']
+            orgnr = form.cleaned_data['orgno']
             company_name = form.cleaned_data['firmanavn']
             # Create new organization
             org = Organization(name=company_name, orgnr=orgnr)
@@ -77,4 +79,4 @@ def new(request):
             return redirect('login')
     else:
         form = RegisterNew()
-    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Register your account', 'errormsg': errormsg, 'submitvalue': 'Register'})
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': heading, 'errormsg': errormsg, 'submitvalue': _('Register')})
