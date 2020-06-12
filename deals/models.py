@@ -32,6 +32,7 @@ class Contract(models.Model):
     description = models.CharField(max_length=255)
     valid_from = models.DateField(blank=True, null=True)
     expires = models.DateField(blank=True, null=True)
+    notes = models.TextField(blank=True)
     status = models.CharField(max_length=20, choices=(('negotiation', 'Negotiation'), ('active','Active'),('cancelled','Cancelled'),('terminated', 'Terminated'),('expired','Expired'),), blank=True)
     document_link = models.URLField(max_length=255, null=True, blank=True)
 
