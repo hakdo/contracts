@@ -7,7 +7,7 @@ class ContractForm(forms.ModelForm):
     
     class Meta:
         model = Contract
-        fields = ('contract_party', 'description', 'valid_from', 'expires', 'contract_type', 'status','document_link',)
+        fields = ('contract_party', 'description', 'valid_from', 'expires', 'contract_type', 'status','document_link','owner','notes',)
         widgets = {
             'valid_from': forms.DateInput(attrs={'type': 'date'}),
             'expires': forms.DateInput(attrs={'type': 'date'}),

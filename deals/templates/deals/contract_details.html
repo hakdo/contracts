@@ -33,6 +33,12 @@
         <tr>
             <th>Document</th><td>{% if contract.document_link %}<a href="{{contract.document_link}}" target="_blank">{{contract.document_link}}</a>{% endif %}</td>
         </tr>
+        <tr>
+            <th>Owner</th><td>{{ contract.owner }}</td>
+        </tr>
+        <tr>
+            <th>Notes (click edit to change)</th><td>{{ contract.notes }}</td>
+        </tr>
     </table>
 </div>
 
