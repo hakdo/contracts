@@ -1,6 +1,8 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -44,29 +46,26 @@
       input[type=submit]:hover {
         background-color: #45a049;
       }
-
     </style>
-    <title>Login</title>
 </head>
 <body>
   <div class="content">
-    <h1>Log in to contracts management</h1>
+    <h1>{% trans 'Log in to contracts management' %}</h1>
   {% if form.errors %}
-    <p style="color: red;">Your username and password didn't match. Please try again.</p>
+    <p style="color: red;">{% trans "Your username and password didn't match. Please try again." %}</p>
   {% endif %}
   
   {% if next %}
     {% if user.is_authenticated %}
-      <p>Your account doesn't have access to this page. To proceed,
-      please login with an account that has access.</p>
+      <p>{% trans 'Access denied' %}.</p>
     {% else %}
-      <p>Please login to see this page.</p>
+      <p>{% trans 'Please login to see this page' %}.</p>
     {% endif %}
   {% endif %}
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Login"/>
+        <input type="submit" value="{% trans 'Login' %}"/>
         <input type="hidden" name="next" value="{{ next }}" />
       </form>
 

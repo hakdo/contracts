@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-12 12:56+0000\n"
+"POT-Creation-Date: 2020-06-12 13:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,3 +64,23 @@ msgstr "Registrer en ny brukerkonto"
 #: deals/views/view_accounts.py:82
 msgid "Register"
 msgstr "Send inn"
+
+#: templates/registration/login.html:54
+msgid "Log in to contracts management"
+msgstr "Innlogging for kontraktsregister"
+
+#: templates/registration/login.html:56
+msgid "Your username and password didn't match. Please try again."
+msgstr "Brukernavnet og passordet stemmer ikke overens"
+
+#: templates/registration/login.html:61
+msgid "Access denied"
+msgstr "Ingen tilgang"
+
+#: templates/registration/login.html:63
+msgid "Please login to see this page"
+msgstr "Vennligst logg inn for å se denne siden"
+
+#: templates/registration/login.html:69
+msgid "Login"
+msgstr "Logg inn"

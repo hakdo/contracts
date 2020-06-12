@@ -27,11 +27,11 @@
                 {{contract.contract_number}}
             </a>
         </td>
-        <td>{{contract.contract_type}}</td>
+        <td>{{contract.contract_type|upper}}</td>
         <td>{{contract.description}}</td>
         <td>
             <a href="{% url 'contracts' status=contract.status %}">
-                {{contract.status}}</td>
+                {{contract.status|upper}}</td>
             </a>
         <td>{{contract.expires}}</td>
     </tr>
