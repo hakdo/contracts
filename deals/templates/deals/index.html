@@ -1,5 +1,6 @@
 {% extends 'deals/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <h1>{{heading}} <span class="queryterm">{{queryterm}}</span></h1>
@@ -8,12 +9,12 @@
 <div class="error">{{ error }}</div>
 <table class="contracts-table">
     <tr>
-        <th>Partner</th>
-        <th>Contract No.</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Expires</th>
+        <th>{% trans 'Partner' %}</th>
+        <th>{% trans 'Contract No.' %}</th>
+        <th>{% trans 'Type' %}</th>
+        <th>{% trans 'Description' %}</th>
+        <th>{% trans 'Status' %}</th>
+        <th>{% trans 'Expires' %}</th>
     </tr>
     {% for contract in contracts %}
     <tr>

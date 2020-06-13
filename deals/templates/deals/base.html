@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +13,10 @@
 
     <div class="content">
         <div class="topnav" id="myTopnav">
-            <a href="{% url 'index' %}" {% if activetab == 'contracts' %}class="active" {% endif %}>Contracts</a>
-            <a href="{% url 'partners' %}" {% if activetab == 'partners' %}class="active" {% endif %}>Partners</a>
+            <a href="{% url 'index' %}" {% if activetab == 'contracts' %}class="active" {% endif %}>{% trans 'Contracts' %}</a>
+            <a href="{% url 'partners' %}" {% if activetab == 'partners' %}class="active" {% endif %}>{% trans 'Partners' %}</a>
             {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Log out</a>
+            <a href="{% url 'logout' %}">{% trans 'Log out' %}</a>
             {% endif %}
             <form action="{% url 'search'  %}" method="GET">
                 <input type="text" placeholder="Search.." name="query" class="search" id="lg-search" />
