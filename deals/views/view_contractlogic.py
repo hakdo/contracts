@@ -6,6 +6,7 @@ from .. forms import ContractForm, PartnerForm, MemberConfigForm, RegisterForm
 from django import forms
 from django.contrib.auth.models import User
 import uuid
+from django.utils.translation import gettext as _
 
 contract_types = ['employment','sales','LOI','NDA','partnership','DPA','other']
 
@@ -31,7 +32,7 @@ def index(request, status='active'):
         mycontracts = mycontracts.order_by(sortby)
     elif sortby is not None:
         errmsg = 'Your sort key is invalid.'
-    heading = 'Contracts: ' + status
+    heading = _('Contracts: ') + status
     return render(request, 'deals/index.html', {'contracts': mycontracts, 'activetab': 'contracts', 'heading': heading, 'status': status, 'error': errmsg})
 
 @login_required()
