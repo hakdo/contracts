@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 18:01+0000\n"
+"POT-Creation-Date: 2020-06-13 18:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,17 +69,33 @@ msgstr "Partnere"
 msgid "Log out"
 msgstr "Logg ut"
 
+#: deals/templates/deals/contract_table_pills.html:6
+msgid "Create New"
+msgstr "Opprett ny"
+
+#: deals/templates/deals/contract_table_pills.html:11
+msgid "Active"
+msgstr "Aktiv"
+
+#: deals/templates/deals/contract_table_pills.html:16
+msgid "Negotiation"
+msgstr "Forhandlinger"
+
+#: deals/templates/deals/contract_table_pills.html:21
+msgid "Expired"
+msgstr "Utløpt"
+
+#: deals/templates/deals/contract_table_pills.html:26
+msgid "All"
+msgstr "Alle"
+
 #: deals/templates/deals/index.html:12
-#, fuzzy
-#| msgid "Partners"
 msgid "Partner"
 msgstr "Partnere"
 
 #: deals/templates/deals/index.html:13
-#, fuzzy
-#| msgid "Contracts"
 msgid "Contract No."
-msgstr "Kontrakter"
+msgstr "Kontrakts-ID"
 
 #: deals/templates/deals/index.html:14
 msgid "Type"
