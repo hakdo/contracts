@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 18:04+0000\n"
+"POT-Creation-Date: 2020-06-14 11:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,6 +69,59 @@ msgstr "Partnere"
 msgid "Log out"
 msgstr "Logg ut"
 
+#: deals/templates/deals/contract_details.html:7
+
+msgid "Contract details"
+msgstr "Kontraktsinfo"
+
+#: deals/templates/deals/contract_details.html:9
+msgid "Edit"
+msgstr "Rediger"
+
+#: deals/templates/deals/contract_details.html:12
+#: deals/templates/deals/index.html:12
+msgid "Partner"
+msgstr "Partnere"
+
+#: deals/templates/deals/contract_details.html:20
+#: deals/templates/deals/index.html:16
+msgid "Status"
+msgstr "Status"
+
+#: deals/templates/deals/contract_details.html:23
+#: deals/templates/deals/index.html:15
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: deals/templates/deals/contract_details.html:26
+msgid "Category"
+msgstr "Kategori"
+
+#: deals/templates/deals/contract_details.html:29
+msgid "Valid from"
+msgstr "Gyldig fra"
+
+#: deals/templates/deals/contract_details.html:32
+#: deals/templates/deals/index.html:17
+msgid "Expires"
+msgstr "Utløper"
+
+#: deals/templates/deals/contract_details.html:35
+msgid "Document"
+msgstr "Dokument"
+
+#: deals/templates/deals/contract_details.html:38
+msgid "Owner"
+msgstr "Eier"
+
+#: deals/templates/deals/contract_details.html:41
+msgid "Notes"
+msgstr "Notater"
+
+#: deals/templates/deals/contract_details.html:41
+msgid "click edit to change"
+msgstr "klikk rediger for å endre"
+
 #: deals/templates/deals/contract_table_pills.html:6
 msgid "Create New"
 msgstr "Opprett ny"
@@ -89,10 +142,6 @@ msgstr "Utløpt"
 msgid "All"
 msgstr "Alle"
 
-#: deals/templates/deals/index.html:12
-msgid "Partner"
-msgstr "Partnere"
-
 #: deals/templates/deals/index.html:13
 msgid "Contract No."
 msgstr "Kontrakts-ID"
@@ -100,18 +149,6 @@ msgstr "Kontrakts-ID"
 #: deals/templates/deals/index.html:14
 msgid "Type"
 msgstr "Kategori"
-
-#: deals/templates/deals/index.html:15
-msgid "Description"
-msgstr "Beskrivelse"
-
-#: deals/templates/deals/index.html:16
-msgid "Status"
-msgstr "Status"
-
-#: deals/templates/deals/index.html:17
-msgid "Expires"
-msgstr "Utløper"
 
 #: deals/views/view_accounts.py:61
 msgid "Register your account"

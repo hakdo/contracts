@@ -1,14 +1,15 @@
 {% extends 'deals/base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block content %}
 <div>
-    <h1>Contract details: {{contract}}</h1>
+    <h1>{% trans 'Contract details' %}: {{contract}}</h1>
     <p>{{contract.contract_number}}</p>
-    <a href="{% url 'edit_contract' pk=contract.pk %}">Edit</a>
+    <a href="{% url 'edit_contract' pk=contract.pk %}">{% trans 'Edit' %}</a>
     <table class="contracts-table">
         <tr>
-            <th>Partner</th>
+            <th>{% trans 'Partner' %}</th>
             <td>
                 <a href="{% url 'partner_contracts' pk=contract.contract_party.pk %}">
                     {{contract.contract_party}}
@@ -16,28 +17,28 @@
             </td>
         </tr>
         <tr>
-            <th>Status</th><td>{{contract.status|title}}</td>
+            <th>{% trans 'Status' %}</th><td>{{contract.status|title}}</td>
         </tr>
         <tr>
-            <th>Status</th><td>{{contract.description|title}}</td>
+            <th>{% trans 'Description' %}</th><td>{{contract.description|title}}</td>
         </tr>
         <tr>
-            <th>Category</th><td>{{contract.contract_type|title}}</td>
+            <th>{% trans 'Category' %}</th><td>{{contract.contract_type|title}}</td>
         </tr>
         <tr>
-            <th>Valid from</th><td>{{contract.valid_from}}</td>
+            <th>{% trans 'Valid from' %}</th><td>{{contract.valid_from}}</td>
         </tr>
         <tr>
-            <th>Expires</th><td>{{contract.expires}}</td>
+            <th>{% trans 'Expires' %}</th><td>{{contract.expires}}</td>
         </tr>
         <tr>
-            <th>Document</th><td>{% if contract.document_link %}<a href="{{contract.document_link}}" target="_blank">{{contract.document_link}}</a>{% endif %}</td>
+            <th>{% trans 'Document' %}</th><td>{% if contract.document_link %}<a href="{{contract.document_link}}" target="_blank">{{contract.document_link}}</a>{% endif %}</td>
         </tr>
         <tr>
-            <th>Owner</th><td>{{ contract.owner }}</td>
+            <th>{% trans 'Owner' %}</th><td>{{ contract.owner }}</td>
         </tr>
         <tr>
-            <th>Notes (click edit to change)</th><td>{{ contract.notes }}</td>
+            <th>{% trans 'Notes' %} ({% trans 'click edit to change' %})</th><td>{{ contract.notes }}</td>
         </tr>
     </table>
 </div>
