@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-14 16:17+0000\n"
+"POT-Creation-Date: 2020-06-14 20:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,6 +56,26 @@ msgstr "Passordene er ikke like."
 #: deals/forms.py:99
 msgid "Password is too short"
 msgstr "Passordet er for kort"
+
+#: deals/models.py:22
+msgid "name"
+msgstr "navn"
+
+#: deals/models.py:23
+msgid "entity_type"
+msgstr "Organisasjonsform"
+
+#: deals/models.py:23
+msgid "Individual"
+msgstr "Enkeltperson"
+
+#: deals/models.py:23
+msgid "Company"
+msgstr "Firma"
+
+#: deals/models.py:23
+msgid "Government"
+msgstr "Myndigheter"
 
 #: deals/models.py:30
 msgid "contract_number"
@@ -145,11 +165,11 @@ msgstr "Utløpt"
 msgid "document_link"
 msgstr "lenke til dokument"
 
-#: deals/templates/deals/base.html:16
+#: deals/templates/deals/base.html:16 deals/templates/deals/partners.html:18
 msgid "Contracts"
 msgstr "Kontrakter"
 
-#: deals/templates/deals/base.html:17
+#: deals/templates/deals/base.html:17 deals/templates/deals/partners.html:7
 msgid "Partners"
 msgstr "Partnere"
 
@@ -225,6 +245,18 @@ msgstr "Kontrakts-ID"
 msgid "Type"
 msgstr "Kategori"
 
+#: deals/templates/deals/partners.html:8
+msgid "New Contract Partner"
+msgstr "Ny kontraktspartner"
+
+#: deals/templates/deals/partners.html:12
+msgid "Contract partner"
+msgstr "Kontraktspartner"
+
+#: deals/templates/deals/partners.html:15
+msgid "Entity type"
+msgstr "Organisasjonsform"
+
 #: deals/views/view_accounts.py:61
 msgid "Register your account"
 msgstr "Registrer en ny brukerkonto"
@@ -260,6 +292,14 @@ msgstr "Redigerer kontrakt "
 #: deals/views/view_contractlogic.py:108
 msgid "Save changes"
 msgstr "Lagre endringer"
+
+#: deals/views/view_contractlogic.py:121
+msgid "New Partner"
+msgstr "Ny kontraktspartner"
+
+#: deals/views/view_contractlogic.py:121
+msgid "Create contract partner"
+msgstr "Opprett ny kontrakt"
 
 #: templates/registration/login.html:53
 msgid "Log in to contracts management"
@@ -311,3 +351,12 @@ msgstr "taushetsavtale"
 
 msgid "other"
 msgstr "Annet"
+
+msgid "individual"
+msgstr "enkeltperson"
+
+msgid "company"
+msgstr "firma"
+
+msgid "government"
+msgstr "myndigheter"

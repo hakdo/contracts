@@ -19,8 +19,8 @@ class Organization(models.Model):
 
 class Partner(models.Model):
     owner = models.ForeignKey(Organization, on_delete = models.CASCADE, null=True)
-    name = models.CharField(max_length=255)
-    entity_type = models.CharField(max_length=255, choices=(('individual','Individual'),('company', 'Company'),('government', 'Government'),), default='company')
+    name = models.CharField(_('name'), max_length=255)
+    entity_type = models.CharField(_('entity_type'), max_length=255, choices=(('individual',_('Individual')),('company', _('Company')),('government', _('Government')),), default='company')
 
     def __str__(self):
         return self.name

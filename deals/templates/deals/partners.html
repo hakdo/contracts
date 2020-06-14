@@ -1,26 +1,33 @@
 {% extends 'deals/base.html' %}
 {% load static %}
+{% load i18n %}
 
 
 {% block content %}
-<h1>Partners</h1>
-<a href="{% url 'new_partner' %}">New Contract Partner</a>
+<h1>{% trans 'Partners' %}</h1>
+<a href="{% url 'new_partner' %}">{% trans 'New Contract Partner' %}</a>
 <table class="contracts-table">
     <tr>
         <th>
-            Contract partner
+            {% trans 'Contract partner' %}
         </th>
         <th>
-            Entity type
+            {% trans 'Entity type' %}
         </th>
         <th>
-            # Contracts
+            # {% trans 'Contracts' %}
         </th>
     </tr>
     {% for partner in partners %}
         <tr>
             <td><a href="{% url 'partner_contracts' pk=partner.pk %}">{{partner.name}}</a></td>
-            <td>{{partner.entity_type}}</td>
+            <td>
+                {% if partner.entity_type_trans %}
+                    {{partner.entity_type_trans}}
+                {% else %}
+                    {{partner.entity_type}}
+                {% endif %}
+            </td>
             <td>{{partner.numcon}}</td>
         </tr>
     {% endfor %}

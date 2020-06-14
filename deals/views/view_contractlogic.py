@@ -35,7 +35,6 @@ def index(request, status='active'):
     for contract in mycontracts:
         contract.status_trans = _(contract.status)
         contract.contract_type_trans = _(contract.contract_type)
-        print(contract.contract_type_trans)
     heading = _('Contracts: ') + _(status)
     return render(request, 'deals/index.html', {'contracts': mycontracts, 'activetab': 'contracts', 'heading': heading, 'status': status, 'error': errmsg})
 
@@ -53,12 +52,16 @@ def partners(request):
     for partner in partners:
         pcons = Contract.objects.filter(contract_party=partner)
         partner.numcon = len(pcons)
+        partner.entity_type_trans = _(partner.entity_type)
     return render(request, 'deals/partners.html', {'partners': partners, 'activetab': 'partners'})
 
 @login_required()
 def partner_detail(request, pk):
     partner = get_object_or_404(Partner, pk=pk, owner = request.user.profile.organization)
     pcontracts = Contract.objects.filter(contract_party=partner)
+    for contract in pcontracts:
+        contract.status_trans = _(contract.status)
+        contract.contract_type_trans = _(contract.contract_type)
     return render(request, 'deals/index.html', {'heading': partner.name, 'activetab': 'partners', 'contracts': pcontracts})
 
 @login_required()
@@ -118,6 +121,6 @@ def new_partner(request):
             return redirect('partners')
     else:
         form = PartnerForm()
-    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Partner', 'activetab': 'partners', 'submitvalue': 'Create contract partner'})
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': _('New Partner'), 'activetab': 'partners', 'submitvalue': _('Create contract partner')})
 
 
