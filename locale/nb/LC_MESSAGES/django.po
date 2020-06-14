@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-14 11:26+0000\n"
+"POT-Creation-Date: 2020-06-14 16:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,6 +57,94 @@ msgstr "Passordene er ikke like."
 msgid "Password is too short"
 msgstr "Passordet er for kort"
 
+#: deals/models.py:30
+msgid "contract_number"
+msgstr "kontrakts-ID"
+
+#: deals/models.py:31
+msgid "contract party"
+msgstr "kontraktspartner"
+
+#: deals/models.py:32
+msgid "contract_type"
+msgstr "kontraktstype"
+
+#: deals/models.py:32
+msgid "Employment"
+msgstr "Arbeidsavtale"
+
+#: deals/models.py:32
+msgid "Sales"
+msgstr "Salgsavtale"
+
+#: deals/models.py:32
+msgid "Letter of intent"
+msgstr "Intensjonsavtale"
+
+#: deals/models.py:32
+msgid "Non-disclosure agreement"
+msgstr "Taushetsavtale"
+
+#: deals/models.py:32
+msgid "Partnership"
+msgstr "Partnerskap"
+
+#: deals/models.py:32
+msgid "Data Protection Agreement"
+msgstr "Databehandleravtale (GDPR)"
+
+#: deals/models.py:32
+msgid "Other"
+msgstr "Annet"
+
+#: deals/models.py:33
+msgid "description"
+msgstr "beskrivelse"
+
+#: deals/models.py:34
+msgid "valid_from"
+msgstr "gyldig fra"
+
+#: deals/models.py:35
+msgid "expires"
+msgstr "utløper"
+
+#: deals/models.py:36
+msgid "owner"
+msgstr "eier"
+
+#: deals/models.py:37
+msgid "notes"
+msgstr "notater"
+
+#: deals/models.py:38
+msgid "status"
+msgstr "status"
+
+#: deals/models.py:38 deals/templates/deals/contract_table_pills.html:16
+msgid "Negotiation"
+msgstr "Forhandlinger"
+
+#: deals/models.py:38 deals/templates/deals/contract_table_pills.html:11
+msgid "Active"
+msgstr "Aktiv"
+
+#: deals/models.py:38
+msgid "Cancelled"
+msgstr "Kansellert"
+
+#: deals/models.py:38
+msgid "Terminated"
+msgstr "Avsluttet"
+
+#: deals/models.py:38 deals/templates/deals/contract_table_pills.html:21
+msgid "Expired"
+msgstr "Utløpt"
+
+#: deals/models.py:39
+msgid "document_link"
+msgstr "lenke til dokument"
+
 #: deals/templates/deals/base.html:16
 msgid "Contracts"
 msgstr "Kontrakter"
@@ -70,7 +158,6 @@ msgid "Log out"
 msgstr "Logg ut"
 
 #: deals/templates/deals/contract_details.html:7
-
 msgid "Contract details"
 msgstr "Kontraktsinfo"
 
@@ -126,18 +213,6 @@ msgstr "klikk rediger for å endre"
 msgid "Create New"
 msgstr "Opprett ny"
 
-#: deals/templates/deals/contract_table_pills.html:11
-msgid "Active"
-msgstr "Aktiv"
-
-#: deals/templates/deals/contract_table_pills.html:16
-msgid "Negotiation"
-msgstr "Forhandlinger"
-
-#: deals/templates/deals/contract_table_pills.html:21
-msgid "Expired"
-msgstr "Utløpt"
-
 #: deals/templates/deals/contract_table_pills.html:26
 msgid "All"
 msgstr "Alle"
@@ -158,9 +233,33 @@ msgstr "Registrer en ny brukerkonto"
 msgid "Register"
 msgstr "Send inn"
 
-#: deals/views/view_contractlogic.py:35
+#: deals/views/view_contractlogic.py:39
 msgid "Contracts: "
 msgstr "Kontrakter: "
+
+#: deals/views/view_contractlogic.py:72
+msgid "Search results for query "
+msgstr "Søkeresultater for "
+
+#: deals/views/view_contractlogic.py:75
+msgid "No results found for query."
+msgstr "Fant ingen resultater for søket."
+
+#: deals/views/view_contractlogic.py:95
+msgid "New Contract"
+msgstr "Ny kontrakt"
+
+#: deals/views/view_contractlogic.py:95
+msgid "Create contract record"
+msgstr "Opprett ny kontrakt"
+
+#: deals/views/view_contractlogic.py:108
+msgid "Editing Contract "
+msgstr "Redigerer kontrakt "
+
+#: deals/views/view_contractlogic.py:108
+msgid "Save changes"
+msgstr "Lagre endringer"
 
 #: templates/registration/login.html:53
 msgid "Log in to contracts management"
@@ -181,3 +280,34 @@ msgstr "Vennligst logg inn for å se denne siden"
 #: templates/registration/login.html:68
 msgid "Login"
 msgstr "Logg inn"
+
+# Some other weird things
+msgid "negotiation"
+msgstr "forhandles"
+
+msgid "expired"
+msgstr "utløpt"
+
+msgid "terminated"
+msgstr "avsluttet"
+
+msgid "cancelled"
+msgstr "kansellert"
+
+msgid "all"
+msgstr "alle"
+
+msgid "sales"
+msgstr "Salg"
+
+msgid "employment"
+msgstr "arbeidsavtale"
+
+msgid "DPA"
+msgstr "databehandleravtale"
+
+msgid "NDA"
+msgstr "taushetsavtale"
+
+msgid "other"
+msgstr "Annet"

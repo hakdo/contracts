@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 import uuid
 from django.utils.translation import gettext as _
 
-contract_types = ['employment','sales','LOI','NDA','partnership','DPA','other']
+contract_types = ['employment','sales','loi','nda','partnership','dpa','other']
 
 # Create your views here.
 @login_required()
@@ -32,7 +32,11 @@ def index(request, status='active'):
         mycontracts = mycontracts.order_by(sortby)
     elif sortby is not None:
         errmsg = 'Your sort key is invalid.'
-    heading = _('Contracts: ') + status
+    for contract in mycontracts:
+        contract.status_trans = _(contract.status)
+        contract.contract_type_trans = _(contract.contract_type)
+        print(contract.contract_type_trans)
+    heading = _('Contracts: ') + _(status)
     return render(request, 'deals/index.html', {'contracts': mycontracts, 'activetab': 'contracts', 'heading': heading, 'status': status, 'error': errmsg})
 
 @login_required()
@@ -65,12 +69,15 @@ def search(request):
     # Check in description field
     descriptionsearch = Contract.objects.filter(description__icontains=query)
     mycontracts = (partnersearch | descriptionsearch).filter(contract_party__owner = request.user.profile.organization).distinct()
-    heading = "Search results for query "
+    heading = _("Search results for query ")
     status = 'all'
     if len(mycontracts) < 1:
-        errmsg = "No results found for query."
+        errmsg = _("No results found for query.")
     else:
         errmsg = ''
+    for contract in mycontracts:
+        contract.status_trans = _(contract.status)
+        contract.contract_type_trans = _(contract.contract_type)
     return render(request, 'deals/index.html', {'contracts': mycontracts, 'activetab': 'contracts', 'heading': heading, 'status': status, 'error': errmsg, 'queryterm': query})
 
 @login_required()
@@ -85,7 +92,7 @@ def new_contract(request):
     else:
         form = ContractForm()
         form.fields['contract_party'].queryset = partners
-    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'New Contract', 'activetab': 'contracts', 'submitvalue': 'Create contract record'})
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': _('New Contract'), 'activetab': 'contracts', 'submitvalue': _('Create contract record')})
 
 @login_required()
 def edit_contract(request, pk):
@@ -98,7 +105,7 @@ def edit_contract(request, pk):
     else:
         form = ContractForm(instance=myinstance)
         form.fields['contract_party'].queryset = partners
-    return render(request, 'deals/new_contract.html', {'form': form, 'heading': 'Editing Contract ' + str(myinstance.contract_number), 'activetab': 'contracts', 'submitvalue': 'Save changes'})
+    return render(request, 'deals/new_contract.html', {'form': form, 'heading': _('Editing Contract ') + str(myinstance.contract_number), 'activetab': 'contracts', 'submitvalue': _('Save changes')})
 
 @login_required()
 def new_partner(request):

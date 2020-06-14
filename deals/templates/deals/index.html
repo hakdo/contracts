@@ -28,12 +28,24 @@
                 {{contract.contract_number}}
             </a>
         </td>
-        <td>{{contract.contract_type|upper}}</td>
+        <td>
+            {% if contract.contract_type_trans %}
+                {{contract.contract_type_trans|upper }}
+            {% else %}
+                {{contract.contract_type|upper}}
+            {% endif %}
+        </td>
+        
         <td>{{contract.description}}</td>
         <td>
             <a href="{% url 'contracts' status=contract.status %}">
-                {{contract.status|upper}}</td>
+                {% if contract.status_trans %}
+                    {{contract.status_trans|upper}}
+                {% else %}
+                    {{contract.status|upper}}
+                {% endif %}
             </a>
+        </td>
         <td>{{contract.expires}}</td>
     </tr>
     {% endfor %}
